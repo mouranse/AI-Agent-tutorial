@@ -1,0 +1,6 @@
+.env
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+research_output.txt

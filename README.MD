@@ -1,16 +1,15 @@
 # AI Agent Tutorial
 
-A Python learning project for exploring AI agents and language-model integrations with [LangChain](https://www.langchain.com/). The project dependencies include OpenAI and Anthropic integrations, Wikipedia access, environment-variable loading, and data validation.
-
-> **Project status:** This repository is a work in progress. It currently contains the dependency list but does not yet include an application entry point or runnable agent example.
+A Python research assistant built with [LangChain](https://www.langchain.com/) and Google's Gemini models. It can search the web, look up information on Wikipedia, and save research results to a local text file. The response is also parsed into a structured Pydantic model.
 
 ## Dependencies
 
-The packages listed in [`requirments.txt`](./requirments.txt) are:
+The packages listed in [`requirements.txt`](./requirements.txt) include:
 
-- `langchain`, `langchain-community` — agent and integration building blocks
-- `langchain-openai`, `langchain-anthropic` — OpenAI and Anthropic integrations
-- `wikipedia` — Wikipedia access
+- `langchain`, `langchain-classic`, `langchain-community` — agent and tool building blocks
+- `langchain-google-genai` — Google Gemini integration
+- `langchain-openai`, `langchain-anthropic` — additional provider integrations
+- `ddgs`, `wikipedia` — web search and Wikipedia access
 - `python-dotenv` — loading configuration from a local `.env` file
 - `pydantic` — data validation
 
@@ -44,16 +43,28 @@ You will need Python and `pip` installed.
 3. Install the dependencies:
 
    ```bash
-   python -m pip install -r requirments.txt
+   python -m pip install -r requirements.txt
    ```
 
-## Configuration
+## Configure Google Gemini
 
-No API keys are required just to install the dependencies. If you add an example that uses a hosted model, provide the key for the provider you choose through environment variables (for example, `OPENAI_API_KEY` or `ANTHROPIC_API_KEY`). Keep secrets out of source control; use local environment variables or a `.env` file and do not commit credentials.
+The app requires a Google AI API key. Create a `.env` file in the project root and add:
 
-## Running the project
+```dotenv
+GOOGLE_API_KEY=your_google_api_key
+```
 
-There is no runnable agent or command-line entry point in the repository yet. Once an example is added, document its run command here.
+Do not commit `.env` or share your API key. The app loads this file locally when it starts.
+
+## Run
+
+From the project root, with your virtual environment activated:
+
+```bash
+python main.py
+```
+
+Enter a research question when prompted. The assistant prints the structured research response. The `save_tool` can append results to a text file in the current working directory.
 
 ## Contributing
 
